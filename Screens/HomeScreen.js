@@ -3,7 +3,7 @@ import *  as React from 'react'
 import { Button, Text } from 'react-native'
 
 function HomeScreen({navigation}) {
-    const navigate = useNavigation();
+
     return (
         <>
             <Text>Home Screen</Text>

@@ -1,29 +1,36 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
+import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View } from 'react-native';
 import DetailedScreen from './Screens/DetailedScreen';
 import HomeScreen from './Screens/HomeScreen';
 import Settings from './Screens/Settings';
-
-const Stack = createNativeStackNavigator();
+const HomeStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-function HomeStack() {
+const DetailedStack = createStackNavigator();
+function HomeStackScreen({navigation}) {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown:false}} />
-      <Stack.Screen name='Detailed' component={DetailedScreen} options={{ headerShown:false}}/>
-      <Stack.Screen name='Settings' component={Settings} options={{ headerShown:false}}/>
-    </Stack.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name='Home' component={HomeScreen}/>
+      <HomeStack.Screen name='Detailed' component={DetailedScreen}/>
+      <HomeStack.Screen name='Settings' component={Settings}/>
+    </HomeStack.Navigator>
   )
 }
+const DetailedStackScreen = ( { navigation } ) => (
+  <DetailedStack.Navigator>
+  <DetailedStack.Screen name='Detailed' component={DetailedScreen}/>
+</DetailedStack.Navigator>
+)
+   
+  
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName='Home'>
-        <Drawer.Screen name='Home' component={HomeStack} />
-        <Drawer.Screen name='Detailed' component={DetailedScreen}/>
+      <Drawer.Navigator >
+        <Drawer.Screen name='Home' component={HomeStackScreen}  />
+        <Drawer.Screen name='Detailed' component={DetailedStackScreen}/>
       </Drawer.Navigator>
    </NavigationContainer>
   );
